@@ -29,7 +29,7 @@ pipeline {
             remote.name = "${env.HOST}"
             remote.host = "${env.HOST}"
             remote.user = "$username"
-            remote.identity = readFile("$private_key")
+            remote.identityFile = "$private_key"
             remote.allowAnyHosts = true
           }
         }
