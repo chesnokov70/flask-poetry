@@ -42,14 +42,14 @@ pipeline {
          mkdir -p /var/lib/jenkins/.ssh
          ssh-keyscan -H ${HOST} >> /var/lib/jenkins/.ssh/known_hosts
          chmod 600 /var/lib/jenkins/.ssh/known_hosts        
-         scp /var/lib/jenkins/workspace/My_Lessons_Folder/node-app/docker-compose.tmpl root@${HOST}:/opt
-         scp /var/lib/jenkins/workspace/My_Lessons_Folder/node-app/promtail-config.yaml root@${HOST}:/opt
+         scp /var/lib/jenkins/workspace/My_Lessons_Folder/flask_poetry/docker-compose.tmpl root@${HOST}:/opt
+         scp /var/lib/jenkins/workspace/My_Lessons_Folder/flask_poetry/promtail-config.yaml root@${HOST}:/opt
          """
         }
       }
     }
     
-    stage ('Deploy node-app') {
+    stage ('Deploy flask_poetry') {
       steps {
         script {
           sshCommand remote: remote, command: """
