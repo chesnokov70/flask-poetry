@@ -7,7 +7,7 @@ pipeline {
   }
   environment {
     EC2_USER = "ubuntu"
-    REGISTRY = "chesnokov70/flask-poetry/ansible/roles/setup-app/files/flask-poetry-app"
+    REGISTRY = "chesnokov70/flask-poetry"
     HOST = '44.204.120.231'
     SSH_KEY = credentials('ssh_instance_key')
     TOKEN = credentials('hub_token')
