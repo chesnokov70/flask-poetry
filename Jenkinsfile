@@ -13,6 +13,15 @@ pipeline {
     TOKEN = credentials('hub_token')
   }
   stages {
+
+    stage('Debug SSH') {
+      steps {
+        sh '''
+          ssh -i ~/.ssh/ssh_github_access_key -T git@github.com || true
+        '''
+      }
+    }
+
     stage('Configure credentials') {
       steps {
         withCredentials([sshUserPrivateKey(credentialsId: 'ssh_instance_key', keyFileVariable: 'private_key', usernameVariable: 'username')]) {
