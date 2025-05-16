@@ -1,12 +1,12 @@
 
 # Create IAM role for monitoring
-resource "aws_iam_instance_profile" "node_app_profile" {
-  name = "node_app_profile"
-  role = aws_iam_role.node_app_role.name
+resource "aws_iam_instance_profile" "flask_poetry_app_profile" {
+  name = "flask_poetry_app_profile"
+  role = aws_iam_role.flask_poetry_app_role.name
 }
 
-resource "aws_iam_role" "node_app_role" {
-  name = "node_app_role"
+resource "aws_iam_role" "flask_poetry_app_role" {
+  name = "flask_poetry_app_role"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17",
@@ -23,9 +23,9 @@ resource "aws_iam_role" "node_app_role" {
 }
 
 # RBAC - Role Based Access Control | Least Privilege
-resource "aws_iam_role_policy" "node_app_role" {
-  name = "node_app_role_policy"
-  role = aws_iam_role.node_app_role.id
+resource "aws_iam_role_policy" "flask_poetry_app_role" {
+  name = "flask_poetry_app_role_policy"
+  role = aws_iam_role.flask_poetry_app_role.id
 
   policy = jsonencode({
     Version = "2012-10-17",

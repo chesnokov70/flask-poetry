@@ -1,0 +1,29 @@
+services:
+  flask-poetry-app:
+    build:
+      context: .
+    restart: always
+    networks:
+      - app
+    logging:
+      driver: "json-file"
+      options:
+        tag: "flask-poetry-app"
+
+  nginx:
+    image: nginx
+    restart: always
+    ports:
+      - 80:80
+    networks:
+      - app
+    volumes:
+      - ./nginx/flask-poetry-app.conf:/etc/nginx/conf.d/default.conf
+    logging:
+      driver: "json-file"
+      options:
+        tag: "flask-poetry-app-nginx"
+
+networks:
+  app:
+    name: app
