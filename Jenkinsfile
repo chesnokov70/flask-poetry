@@ -39,11 +39,11 @@ pipeline {
          docker login -u chesnokov70 -p $TOKEN
          docker build -t "${env.REGISTRY}:${env.BUILD_ID}" .
          docker push "${env.REGISTRY}:${env.BUILD_ID}"
-         mkdir -p ~/.ssh
-         ssh-keyscan -H ${HOST} >> ~/.ssh/known_hosts
-         chmod 600 ~/.ssh/known_hosts     
-         scp -i $private_key /var/lib/jenkins/workspace/My_Lessons_Folder/flask_poetry/docker-compose.tmpl ${EC2_USER}@${HOST}:/opt
-         scp -i $private_key /var/lib/jenkins/workspace/My_Lessons_Folder/flask_poetry/promtail-config.yaml ${EC2_USER}@${HOST}:/opt
+         mkdir -p /var/lib/jenkins/.ssh
+         ssh-keyscan -H ${HOST} >> /var/lib/jenkins/.ssh/known_hosts
+         chmod 600 /var/lib/jenkins/.ssh/known_hosts        
+         scp /var/lib/jenkins/workspace/My_Lessons_Folder/flask_poetry/docker-compose.tmpl ${EC2_USER}@${HOST}:/opt
+         scp /var/lib/jenkins/workspace/My_Lessons_Folder/flask_poetry/promtail-config.yaml ${EC2_USER}@${HOST}:/opt
          """
         }
       }
