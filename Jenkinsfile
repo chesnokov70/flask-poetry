@@ -41,17 +41,13 @@ pipeline {
          docker build -t "${env.REGISTRY}:${env.BUILD_ID}" .
          docker push "${env.REGISTRY}:${env.BUILD_ID}"
          mkdir -p /var/lib/jenkins/.ssh
-         ssh-keyscan -H ${HOST} >> /var/lib/jenkins/.ssh/known_hosts
-         chmod 600 /var/lib/jenkins/.ssh/known_hosts        
-         scp /var/lib/jenkins/workspace/My_Lessons_Folder/flask_poetry/docker-compose.tmpl root@${HOST}:/opt
-         scp /var/lib/jenkins/workspace/My_Lessons_Folder/flask_poetry/promtail-config.yaml root@${HOST}:/opt
-         scp /var/lib/jenkins/workspace/My_Lessons_Folder/flask_poetry/nginx/* root@${HOST}:/opt/nginx
 
         ssh-keyscan -H ${HOST} >> ~/.ssh/known_hosts
         chmod 600 ~/.ssh/known_hosts
 
         scp -i $PRIVATE_KEY -o StrictHostKeyChecking=no $WORKSPACE/docker-compose.tmpl $USER@${HOST}:/opt
         scp -i $PRIVATE_KEY -o StrictHostKeyChecking=no $WORKSPACE/promtail-config.yaml $USER@${HOST}:/opt
+        scp -i $PRIVATE_KEY -o StrictHostKeyChecking=no $WORKSPACE/nginx/* $USER@${HOST}:/opt/nginx        
         """
         }
       }
