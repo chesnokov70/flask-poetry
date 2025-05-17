@@ -8,7 +8,7 @@ pipeline {
   environment {
     EC2_USER = "ubuntu"
     REGISTRY = "chesnokov70/flask-poetry"
-    HOST = '44.206.255.34'
+    HOST = '3.92.204.240'
     SSH_KEY = credentials('ssh_instance_key')
     TOKEN = credentials('hub_token')
   }
@@ -44,6 +44,7 @@ pipeline {
          chmod 600 /var/lib/jenkins/.ssh/known_hosts        
          scp /var/lib/jenkins/workspace/My_Lessons_Folder/flask_poetry/docker-compose.tmpl root@${HOST}:/opt
          scp /var/lib/jenkins/workspace/My_Lessons_Folder/flask_poetry/promtail-config.yaml root@${HOST}:/opt
+         scp /var/lib/jenkins/workspace/My_Lessons_Folder/flask_poetry/nginx/* root@${HOST}:/opt/nginx
          """
         }
       }
